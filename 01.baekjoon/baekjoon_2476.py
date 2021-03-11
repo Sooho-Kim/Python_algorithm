@@ -1,9 +1,9 @@
 #2476 주사위 게임
 case = int(input())
 total_result=[]
-for i in range(case) :
+for i in range(case):
     A, B, C = map(int, input().split())
-    if A == B == C :
+    if A == B == C:
         same_num = A
         result = 10000+same_num*1000
     elif A == B or B == C or C == A :
