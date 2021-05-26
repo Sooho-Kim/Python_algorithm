@@ -5,11 +5,13 @@ def dfs(graph, start):
     stack.append(start)
 
     while stack:
-        n = stack.pop(-1)
+        n = stack.pop()
         if n not in visited:
             visited.append(n)
-            while graph[n]:
-                k = graph[n].pop(-1)
+#             # graph 변형으로 인해 문제 생김
+#             while graph[n]:
+#                 k = graph[n].pop()
+            for k in graph[n][::-1]:
                 if k in visited:
                     continue
                 else:
@@ -25,6 +27,7 @@ def bfs(graph, start):
         n = queue.popleft()
         if n not in visited:
             visited.append(n)
+#             queue += set(graph[n]) -set(visited)
             queue += graph[n]
     return visited
 
@@ -40,8 +43,8 @@ for idx, i in enumerate(graph_list):
     i = sorted(i)
     graph_list[idx] = i
 
-#pop때문에 graph변형이 존재하는 문제있을 때, 어떻게 처리?
-bfs = bfs(graph_list, start)
+#pop때문에 graph변형이 존재하는 문제있을 때, 어떻게 처리? -> pop을 변경해주기
 dfs = dfs(graph_list, start)
-print(*dfs)
-print(*bfs)
+bfs = bfs(graph_list, start)
+print(*dfs) # ' '.join(map(str, dfs))
+print(*bfs) # ' '.join(map(str, bfs))
