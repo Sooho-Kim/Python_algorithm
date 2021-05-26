@@ -45,9 +45,11 @@ for i in range(m):
     parent, child = map(int, input().split())
     graph_list[parent].append(child)
     graph_list[child].append(parent)
-for idx, i in enumerate(graph_list):
-    i = sorted(i)
-    graph_list[idx] = i
+for i in range(len(graph_list)):
+    graph_list[i].sort()
+# for idx, i in enumerate(graph_list):
+#     i = sorted(i)
+#     graph_list[idx] = i
 
 #pop때문에 graph변형이 존재하는 문제있을 때, 어떻게 처리? -> pop을 변경해주기
 dfs = dfs(graph_list, start)
