@@ -1,4 +1,9 @@
+import sys
+sys.setrecursionlimit(10**9)
 from collections import deque
+
+input = sys.stdin.readline
+
 def dfs(graph, start):
     visited = []
     stack = []
