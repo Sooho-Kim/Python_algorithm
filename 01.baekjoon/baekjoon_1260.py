@@ -27,6 +27,7 @@ def bfs(graph, start):
         n = queue.popleft()
         if n not in visited:
             visited.append(n)
+#             # 이렇게 하면 안된다.
 #             queue += set(graph[n]) -set(visited)
             queue += graph[n]
     return visited
