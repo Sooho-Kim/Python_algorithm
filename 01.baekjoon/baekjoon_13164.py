@@ -10,6 +10,6 @@ student = list(map(int, input().split()))
 # 학생들의 키 차이 넣기
 for i in range(1, len(student)):
     diff.append(student[i] - student[i-1])
-
+diff.sort(reverse=True)
 # 결과 출력
 print(sum(diff[m-1:]))
