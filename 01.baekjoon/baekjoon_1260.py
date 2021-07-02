@@ -56,3 +56,43 @@ dfs = dfs(graph_list, start)
 bfs = bfs(graph_list, start)
 print(*dfs) # ' '.join(map(str, dfs))
 print(*bfs) # ' '.join(map(str, bfs))
+
+# ver2
+N, M, V = map(int, input().split())
+graph = [[] for _ in range(N+1)]
+for i in range(M):
+    start, end = list(map(int, input().split()))
+    graph[start].append(end)
+    graph[end].append(start)
+    graph[start].sort()
+    graph[end].sort()
+
+from collections import deque
+#dfs
+stack = []
+stack.append(V)
+visited = []
+while stack:
+    n = stack.pop()
+    if n not in visited:
+        visited.append(n)
+        for i in graph[n][::-1]:
+            if i in visited:
+                continue
+            else:
+                stack.append(i)
+print(*visited)
+#bfs
+queue = deque()
+queue.append(V)
+visited = []
+while queue:
+    n = queue.popleft()
+    if n not in visited:
+        visited.append(n)
+        for i in graph[n]:
+            if i in visited:
+                continue
+            else:
+                queue.append(i)
+print(*visited)
