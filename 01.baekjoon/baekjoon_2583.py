@@ -45,3 +45,41 @@ print(len(whole_area))
 
 #구분된 영역을 오름차순으로 출력
 print(*whole_area)
+
+# ver2
+import sys
+sys.setrecursionlimit(10**6)
+
+M, N, K = map(int, input().split())
+graph = [[1] * N for _ in range(M)]
+
+for i in range(K):
+    x1, y1, x2, y2 = map(int, input().split())
+    for j in range(M-y1-1, M-y2-1, -1):
+        for k in range(x1, x2):
+            graph[j][k] = 0
+
+def dfs(graph, y, x):
+    global count
+    count += 1
+    graph[y][x] = 0
+
+    dx = [0, 0, 1, -1]
+    dy = [-1, 1, 0, 0]
+    for i in range(4):
+        x0 = x + dx[i]
+        y0 = y + dy[i]
+        if (0<= y0 < M) and (0<= x0 < N):
+            if graph[y0][x0] != 0:
+                dfs(graph, y0, x0)
+area_list = []
+for y in range(M):
+    for x in range(N):
+        count = 0
+        if graph[y][x] != 0:
+            dfs(graph, y, x)
+            area_list.append(count)
+print(len(area_list))
+area_list.sort()
+print(*area_list)
+
